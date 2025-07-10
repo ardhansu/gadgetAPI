@@ -1,8 +1,8 @@
-# 🕶️ IMF Gadget API
+#  IMF Gadget API
 
 Welcome to the Impossible Missions Force (IMF) Gadget Management API! This secure API allows authorized IMF personnel to manage the organization's high-tech gadget inventory.
 
-## 🎯 Mission Overview
+##  Mission Overview
 
 This API provides secure endpoints for:
 - Managing gadget inventory (CRUD operations)
@@ -11,7 +11,7 @@ This API provides secure endpoints for:
 - Random mission success probability calculations
 - Unique codename generation
 
-## 🔧 Tech Stack
+##  Tech Stack
 
 - **Node.js** with Express.js
 - **PostgreSQL** with Prisma ORM
@@ -21,7 +21,7 @@ This API provides secure endpoints for:
 - **Helmet** for security headers
 - **Rate limiting** for API protection
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -59,7 +59,7 @@ This API provides secure endpoints for:
    npm run dev
    ```
 
-## 🔐 Authentication
+##  Authentication
 
 All API endpoints (except auth routes) require JWT authentication. Include the token in the Authorization header:
 
@@ -75,7 +75,7 @@ If you ran the seed script, you can use these test accounts:
 - **Handler**: `handler@imf.gov` / `handler123456`
 - **Agent**: `agent@imf.gov` / `agent123456`
 
-## 📚 API Endpoints
+##  API Endpoints
 
 ### Authentication
 
@@ -194,7 +194,7 @@ Trigger self-destruct sequence (requires HANDLER or ADMIN role).
 }
 ```
 
-## 🛡️ Security Features
+##  Security Features
 
 - **JWT Authentication**: Secure token-based authentication
 - **Role-Based Access Control**: Different permission levels (AGENT, HANDLER, ADMIN)
@@ -204,13 +204,13 @@ Trigger self-destruct sequence (requires HANDLER or ADMIN role).
 - **Input Validation**: Joi schema validation
 - **Soft Deletes**: Gadgets are decommissioned, not deleted
 
-## 🎭 Role Permissions
+##  Role Permissions
 
 - **AGENT**: Can view gadgets only
 - **HANDLER**: Can view, create, update, and decommission gadgets
 - **ADMIN**: Full access to all operations
 
-## 🔧 Development
+##  Development
 
 ### Available Scripts
 
@@ -227,7 +227,7 @@ The API uses the following models:
 - **User**: IMF agents with authentication
 - **Gadget**: Gadget inventory with status tracking
 
-## 📊 API Response Format
+##  API Response Format
 
 All API responses follow a consistent format:
 
@@ -239,7 +239,7 @@ All API responses follow a consistent format:
 }
 ```
 
-## 🌐 Deployment
+##  Deployment
 
 This API is designed to be deployed on platforms like:
 - Heroku
@@ -249,7 +249,7 @@ This API is designed to be deployed on platforms like:
 
 Make sure to set all environment variables in your deployment platform.
 
-## 🔍 Error Handling
+##  Error Handling
 
 The API includes comprehensive error handling for:
 - Authentication errors
