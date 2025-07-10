@@ -1,0 +1,129 @@
+{
+  "info": {
+    "name": "IMF Gadget API",
+    "description": "Impossible Missions Force Gadget Management API\n\nThis API allows authorized IMF personnel to manage the organization's high-tech gadget inventory.\n\n## Authentication\nAll endpoints (except auth routes) require JWT authentication. Include the token in the Authorization header:\n```\nAuthorization: Bearer <your-jwt-token>\n```\n\n## Test Users\n- **Admin**: admin@imf.gov / admin123456\n- **Handler**: handler@imf.gov / handler123456\n- **Agent**: agent@imf.gov / agent123456\n\n## Role Permissions\n- **AGENT**: Can view gadgets only\n- **HANDLER**: Can view, create, update, and decommission gadgets\n- **ADMIN**: Full access to all operations\n\n---\n*This message will self-destruct in 5 seconds...*",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "Register Agent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newagent@imf.gov\",\n  \"password\": \"securepassword123\",\n  \"role\": \"AGENT\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new IMF agent. Available roles: AGENT, HANDLER, ADMIN"
+          },
+          "response": []
+        },
+        {
+          "name": "Login Agent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set('token', response.token);",
+                  "    pm.test('Token saved to environment', function () {",
+                  "        pm.expect(response.token).to.be.a('string');",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@imf.gov\",\n  \"password\": \"admin123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Authenticate an agent and receive JWT token. Token is automatically saved to environment variables."
+          },
+          "response": []
+        }
+      ],
+      "description": "Authentication endpoints for IMF agents"
+    },
+    {
+      "name": "🔧 Gadget Management",
+      "item": [
+        {
+          "name": "Get All Gadgets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/gadgets",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gadgets"]
+            },
+            "description": "Retrieve all gadgets with mission success probabilities. Available to all authenticated users."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Gadgets by Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/gadgets?status=AVAILABLE",
+              "host": ["{{base_url}}"],
+              "path": ["api", "gadgets"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "AVAILABLE",
+                  "description": "Filter by status: AVAILABLE, DEPLOYED, DESTROYED, DECOMMISSIONED"
+                }
+              ]
+            },
+            "description": "Retrieve gadgets by their status. Only accessible to authenticated users."
+          },
+          "response": []
+        }
+      ],
+      "description": "Manage gadgets used in field operations"
+    }
+  ]
+}
